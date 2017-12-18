@@ -1,14 +1,11 @@
-const { promisify } = require('util');
-
+const TestServer = require('fetch-test-server');
 const api = require('../../api');
 
 const beforeEach = t => {
-  t.context.api = api.app.listen();
+  t.context.api = new TestServer(api.app);
 };
 
-const afterEach = t => {
-  return promisify(t.context.api.close).bind(t.context.api);
-};
+const afterEach = () => {};
 
 module.exports = {
   beforeEach,

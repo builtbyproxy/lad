@@ -1,14 +1,11 @@
-const { promisify } = require('util');
-
+const TestServer = require('fetch-test-server');
 const web = require('../../web');
 
 const beforeEach = t => {
-  t.context.web = web.app.listen();
+  t.context.web = new TestServer(web.app.callback());
 };
 
-const afterEach = t => {
-  return promisify(t.context.web.close).bind(t.context.web);
-};
+const afterEach = () => {};
 
 module.exports = {
   beforeEach,
