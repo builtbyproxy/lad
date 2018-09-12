@@ -64,5 +64,10 @@
   "First name": "First name",
   "Last name": "Last name",
   "Reset": "Reset",
-  "Save": "Save"
+  "Save": "Save",
+  "Sign out of &#124; <span class=\"notranslate\">Lad</span>": "Sign out of &#124; <span class=\"notranslate\">Lad</span>",
+  "Sign out of your account": "Sign out of your account",
+  "Logged out!": "Logged out!",
+  "You have logged out.": "You have logged out.",
+  "Please log in to view the page you requested.": "Please log in to view the page you requested."
 }

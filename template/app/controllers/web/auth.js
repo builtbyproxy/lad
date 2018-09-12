@@ -201,13 +201,19 @@ const register = async ctx => {
         }
       });
       ctx.logger.debug('queued welcome email', job);
+      Jobs.find({})
+        .lean()
+        .exec()
+        .then(console.log)
+        .catch(console.error);
+        
     } catch (err) {
-      console.log('something went wrong');
-      // ctx.logger.error(err);
+      console.log('something went wrong with scheduling the job');
+      ctx.logger.error(err);
     }
   } catch (err) {
     console.log('something went wrong overall');
-    // ctx.throw(Boom.badRequest(err.message));
+    ctx.throw(Boom.badRequest(err.message));
   }
 };
 
