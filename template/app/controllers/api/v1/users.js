@@ -8,6 +8,7 @@ const { Users } = require('../../../models');
 
 const create = async ctx => {
   const { body } = ctx.request;
+  console.log('creating a user: ', body)
 
   if (!_.isString(body.email) || !validator.isEmail(body.email))
     return ctx.throw(Boom.badRequest(ctx.translate('INVALID_EMAIL')));
@@ -25,6 +26,7 @@ const create = async ctx => {
       api_token: user.api_token
     };
   } catch (err) {
+    console.log('yeah there was an error: ', err);
     ctx.throw(Boom.badRequest(err.message));
   }
 };

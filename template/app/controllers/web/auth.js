@@ -152,9 +152,12 @@ const register = async ctx => {
   if (!_.isString(body.password) || s.isBlank(body.password))
     return ctx.throw(Boom.badRequest(ctx.translate('INVALID_PASSWORD')));
 
+    console.log('about to register user');
   // register the user
   try {
     const count = await Users.count({ group: 'admin' });
+    console.log('looking for count: ', count);
+
     const user = await Users.registerAsync(
       { email: body.email, group: count === 0 ? 'admin' : 'user' },
       body.password
@@ -199,10 +202,12 @@ const register = async ctx => {
       });
       ctx.logger.debug('queued welcome email', job);
     } catch (err) {
-      ctx.logger.error(err);
+      console.log('something went wrong');
+      // ctx.logger.error(err);
     }
   } catch (err) {
-    ctx.throw(Boom.badRequest(err.message));
+    console.log('something went wrong overall');
+    // ctx.throw(Boom.badRequest(err.message));
   }
 };
 
