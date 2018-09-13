@@ -190,18 +190,17 @@ const register = async ctx => {
 
     // add welcome email job
     try {
-      createJob();
+      // const job = await Jobs.create({
+      //   name: 'email',
+      //   data: {
+      //     template: 'welcome',
+      //     to: user.email,
+      //     locals: {
+      //       user: select(user.toObject(), Users.schema.options.toJSON.select)
+      //     }
+      //   }
+      // });
 
-      const job = await Jobs.create({
-        name: 'email',
-        data: {
-          template: 'welcome',
-          to: user.email,
-          locals: {
-            user: select(user.toObject(), Users.schema.options.toJSON.select)
-          }
-        }
-      });
       createJob({
         name: 'email',
         data: {
@@ -213,7 +212,7 @@ const register = async ctx => {
         }
       });
 
-      ctx.logger.debug('queued welcome email', job);
+      ctx.logger.debug('queued welcome email'); // , job
 
       // Jobs.find({})
       //   .lean()

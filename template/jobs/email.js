@@ -1,7 +1,7 @@
 const Email = require('email-templates');
 const config = require('../config');
 
-export const email = new Email(config.email);
+const email = new Email(config.email);
 
 module.exports = async function(job, done) {
   try {
@@ -11,3 +11,5 @@ module.exports = async function(job, done) {
     done(err);
   }
 };
+
+module.exports = { email };
