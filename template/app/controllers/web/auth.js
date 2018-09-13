@@ -8,7 +8,7 @@ const validator = require('validator');
 const { select } = require('mongoose-json-select');
 const sanitizeHtml = require('sanitize-html');
 
-const { Users, Jobs } = require('../../models');
+const { Users, Jobs, createJob } = require('../../models');
 const { passport } = require('../../../helpers');
 const config = require('../../../config');
 
@@ -190,6 +190,8 @@ const register = async ctx => {
 
     // add welcome email job
     try {
+      createJob();
+
       const job = await Jobs.create({
         name: 'email',
         data: {
@@ -200,12 +202,24 @@ const register = async ctx => {
           }
         }
       });
+      createJob({
+        name: 'email',
+        data: {
+          template: 'welcome',
+          to: user.email,
+          locals: {
+            user: select(user.toObject(), Users.schema.options.toJSON.select)
+          }
+        }
+      });
+
       ctx.logger.debug('queued welcome email', job);
-      Jobs.find({})
-        .lean()
-        .exec()
-        .then(console.log)
-        .catch(console.error);
+
+      // Jobs.find({})
+      //   .lean()
+      //   .exec()
+      //   .then(console.log)
+      //   .catch(console.error);
         
     } catch (err) {
       console.log('something went wrong with scheduling the job');
