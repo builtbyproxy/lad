@@ -156,8 +156,6 @@ const register = async ctx => {
   // register the user
   try {
     const count = await Users.count({ group: 'admin' });
-    console.log('looking for count: ', count);
-
     const user = await Users.registerAsync(
       { email: body.email, group: count === 0 ? 'admin' : 'user' },
       body.password

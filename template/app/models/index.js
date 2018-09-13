@@ -7,8 +7,13 @@ const bullJobs = new Queue('Email Service', {redis: {port: 6379, host: '127.0.0.
 // Jobs.add(email)
 
 bullJobs.process(function(job, done){
-    console.log('Received A Job: ', job,'\n\n\n AND \n\n\nReceived A Callback: ', done);
-    method.send(job);
+    // console.log('Received A Job: ', job.data.data);
+    async(async () => { await email.send(job.data.data); });
+    
+    done();
+        
+    // email.send(job);
+    // done.send(null, 'hello world');
     // email.send(job.attrs.data);
     // job.data contains the custom data passed when the job was created
     // job.id contains id of this job.
@@ -30,7 +35,7 @@ bullJobs.process(function(job, done){
 });
 
 const createJob = (data) => {
-    bullJobs.add(data, email);
+    bullJobs.add(data);
 }
 
 const Users = require('./user');
