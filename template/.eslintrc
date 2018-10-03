@@ -4,5 +4,8 @@
   "rules": { "compat/compat": "error" },
   "settings": {
     "polyfills": ["promises","fetch"]
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
   }
 }
