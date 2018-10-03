@@ -86,7 +86,7 @@ const login = async (ctx, next) => {
 
         let redirectTo = `/${ctx.locale}${
           config.passportCallbackOptions.successReturnToOrRedirect
-        }`;
+          }`;
 
         if (ctx.session && ctx.session.returnTo) {
           redirectTo = ctx.session.returnTo;
@@ -152,7 +152,7 @@ const register = async ctx => {
   if (!_.isString(body.password) || s.isBlank(body.password))
     return ctx.throw(Boom.badRequest(ctx.translate('INVALID_PASSWORD')));
 
-    console.log('about to register user');
+  console.log('about to register user');
   // register the user
   try {
     const count = await Users.count({ group: 'admin' });
@@ -217,7 +217,7 @@ const register = async ctx => {
       //   .exec()
       //   .then(console.log)
       //   .catch(console.error);
-        
+
     } catch (err) {
       console.log('something went wrong with scheduling the job');
       ctx.logger.error(err);
